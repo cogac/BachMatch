@@ -30,7 +30,7 @@ if not file_exists('generated_abstracts_text.txt'):
     file.close()
 
 with open('generated_abstracts_text.txt', 'r') as file:
-    text = file.read()
+    text = file.read().replace('####', '')
 
 # Splitting the text into sections based on the topics marked with ###
 topics = re.split(r'###\s*', text)
