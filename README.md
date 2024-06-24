@@ -2,9 +2,13 @@
 Teilnehmer: 
 
 Tim Kuhn 8284060 
+
 Hendrik Träber
+
 Paul Brüderle
+
 David Kleiner
+
 Gülbahar Cogac 5801309
 
 ReadMe:
