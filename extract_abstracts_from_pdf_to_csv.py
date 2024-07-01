@@ -58,5 +58,6 @@ for topic, entries in topic_dict.items():
         })
 
 df = pd.DataFrame(df_list)
+df.columns = [col.lower() for col in df.columns]
 
 df.to_csv("extracted_abstracts.csv", index=False)

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # Load your data from a CSV file
 # data = pd.read_excel('tempor.ods', engine='odf')
 data = pd.read_csv('extracted_abstracts.csv')
-data['text'] = data['Abstract'].str.replace('Abstract: ', '')
+data['text'] = data['abstract'].str.replace('Abstract: ', '')
 # Vectorize the text and compute TF-IDF scores
 tfidf_vectorizer = TfidfVectorizer()
 X = tfidf_vectorizer.fit_transform(data['text'])
@@ -25,7 +25,7 @@ y_kmeans = kmeans.fit_predict(X)
 # Create a new dataframe with original text and cluster labels
 data['clusters'] = y_kmeans
 
-data[['text', 'clusters']].to_csv('tempor_kw_cluster.csv', index=False)
+data[['topic', 'title', 'text', 'clusters']].to_csv('clusters_by_keyword.csv', index=False)
 
 # Plot the clusters using matplotlib
 # plt.scatter(X[:, 0], X[:, 1], c=y_kmeans, s=200, cmap='viridis')
