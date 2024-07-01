@@ -25,3 +25,6 @@ dist-ssr
 .spyproject/*
 DatenBA_Arbeiten.pdf
 *tempor*
+
+# any .unused files should not be in the repo
+*.unused
