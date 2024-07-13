@@ -10,6 +10,9 @@
 | David Kleiner  | MISSING        |
 | Gülbahar Cogac | 5801309        |
 
+##README: Dokumentation enthält Idee der Anwendung, Architektur, Entwurf, Screencast eines 
+Demos, etc. in der Datei README.md (keine verteilte Dokumentation) 
+
 ## TODO:
 
 (This section gets deleted when everything is done)
@@ -19,6 +22,8 @@ und Lernerfahrungen in einem Abschlussbericht zusammen.
 
 ## Use-Case:
 
+
+
 ## Structure
 
 This Proof-Of-Concept is based on a Use-Case-Demo made available by our professor, Prof. Dr. Pfisterer. We did make some changes.
@@ -26,3 +31,7 @@ This Proof-Of-Concept is based on a Use-Case-Demo made available by our professo
 ## Implementation
 
 ## Functionality
+
+## Results
+
+##Challenges 
