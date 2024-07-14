@@ -24,13 +24,22 @@ Dokumentation, die den Aufbau, die Implementierung und die
 Funktionalitäten der Anwendung beschreibt. Fassen Sie die Ergebnisse, Herausforderungen
 und Lernerfahrungen in einem Abschlussbericht zusammen.
 
-## Thema
+## Topic: Finding the Perfect Academic Supervisor
 
-## Zielsetzung
+Finding an academic supervisor who aligns perfectly with a student's research interests is a critical step in the success of any research project. Our program addresses this need by providing a systematic and efficient way for students to connect with supervisors whose expertise closely matches their research topics. By leveraging advanced search algorithms and a comprehensive database of academic profiles, we aim to make the process of finding the right supervisor both quick and accurate.
+
+
+## Objective
+
+The primary objective of our program is to facilitate the matching process between students and academic supervisors. By inputting their research title and a brief summary, students can use our program to search through a curated database of potential supervisors. Each supervisor has listed their research areas and provided a description of their expertise. The program’s goal is to return the top 10 most suitable supervisors based on the relevance of their expertise to the student's research. This not only saves time but also enhances the quality of academic mentorship by ensuring a better fit between students and supervisors.
+
 
 ## Use-Case:
 
-für Studenten, finden des idealen wissenschaftlichen Betreuers
+Students:
+
+Graduate students can use our program to find the best academic supervisor for their research projects. They enter their project title and a brief abstract, and the program searches a database of supervisors. The program then provides a list of the top 10 supervisors whose expertise best matches the student's research topic. This process ensures that students find the most relevant and suitable supervisors efficiently.
+
 
 ## Structure
 
