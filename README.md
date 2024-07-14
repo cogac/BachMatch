@@ -7,7 +7,7 @@
 | Tim Kuhn       | 8284060        |
 | Hendrik Träber | 6367227        |
 | Paul Brüderle  | MISSING        |
-| David Kleiner  | MISSING        |
+| David Kleiner  | 1622864        |
 | Gülbahar Cogac | 5801309        |
 
 ## TODO:
@@ -52,13 +52,8 @@ Grundaufbau gegeben, Anwendung basierend auf der Kappa-Architektur und Apache Sp
 
 Unsere Änderungen:
 
-Unsere Daten:
-BetruerFertig.csv Daten über Betreuer in Form von fachgebiet und einer genaueren Beschreibung in welchen Themenbereichen diese tätig sind
-extracted_abstracts.csv DAten über Studenten, Titel und Abstract
 
-This Proof-Of-Concept is based on a Use-Case-Demo made available by our professor, Prof. Dr. Pfisterer. We did make some changes.
-
-Kurzerklaerung:
+ [ Kurzerklaerung:
 Nodejs Express Web-App, verbunden mit KAFKA zur Datenuebertragung,
 Apache Spark nimmt die Eingaben des Abstracts und vektorisiert sie,
 Spark schreibt das alles in eine Weaviate datenbank
@@ -71,7 +66,52 @@ Texte ueber wiss. Betreuer, und deren Vektoren
 Beispiel Texte fuer 'wissen. arbeiten'
 texte die die user eingeben haben
 
-das alles wird in einem k8s ausgefuehrt.
+das alles wird in einem k8s ausgefuehrt. ]
+
+### Structure
+
+The foundation of our application is established by our professor, based on the Kappa Architecture and utilizing Apache Spark as the central technology. Below is an overview of the implementation and modifications:
+
+#### Application Overview
+
+Our application is designed to match students with suitable academic supervisors through a sophisticated data processing pipeline. The key components and technologies involved are as follows:
+
+1. **Node.js Express Web App**:
+   - Provides a user interface for students to submit their research titles and abstracts.
+
+2. **Kafka**:
+   - Manages the data transmission between the web app and the processing system.
+   - Utilizes a Hadoop file system for efficient data storage.
+
+3. **Apache Spark**:
+   - Processes the input data from Kafka.
+   - Vectorizes the research abstracts for semantic analysis.
+
+4. **Weaviate**:
+   - Stores the vectorized data.
+   - Facilitates the semantic search for matching supervisors.
+
+5. **Kubernetes (k8s)**:
+   - Deploys and manages the application, ensuring scalability and reliability.
+
+#### Data Flow and Storage
+
+1. **Data Input and Transmission**:
+   - Students input their research titles and abstracts into the web application.
+   - This data is transmitted to Kafka for further processing.
+
+2. **Data Processing**:
+   - Apache Spark processes and vectorizes the input data.
+   - The processed data is then stored in Weaviate.
+
+3. **Data Storage in Weaviate**:
+   - **Supervisor Information**: Includes texts about academic supervisors and their vector representations.
+   - **Example Research Texts**: Contains sample texts for various types of academic work.
+   - **User Inputs**: Comprises texts and abstracts submitted by students.
+
+By leveraging this architecture, our application efficiently processes and stores data, enabling the effective matching of students with the most suitable academic supervisors.
+
+
 
 ## Implementation
 
