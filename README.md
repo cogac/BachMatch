@@ -6,7 +6,7 @@
 | -------------- | -------------- |
 | Tim Kuhn       | 8284060        |
 | Hendrik Träber | 6367227        |
-| Paul Brüderle  | MISSING        |
+| Paul Brüderle  | 3224687        |
 | David Kleiner  | 1622864        |
 | Gülbahar Cogac | 5801309        |
 
@@ -116,10 +116,9 @@ By leveraging this architecture, our application efficiently processes and store
 ## Implementation
 
 ## Functionality
-
+[screencast]
 ## Results
 
 ## Challenges
 
-- finden eines guten Use cases
-- Einrichten des vorgegebenen Grundaufbau
+
