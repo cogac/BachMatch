@@ -48,12 +48,12 @@ Graduate students can use our program to find the best academic supervisor for t
 
 ## Structure
 
-Grundaufbau gegeben, Anwendung basierend auf der Kappa-Architektur und Apache Spark als zentrale Technologie
+[Grundaufbau gegeben, Anwendung basierend auf der Kappa-Architektur und Apache Spark als zentrale Technologie
 
 Unsere Änderungen:
 
 
- [ Kurzerklaerung:
+  Kurzerklaerung:
 Nodejs Express Web-App, verbunden mit KAFKA zur Datenuebertragung,
 Apache Spark nimmt die Eingaben des Abstracts und vektorisiert sie,
 Spark schreibt das alles in eine Weaviate datenbank
@@ -68,13 +68,12 @@ texte die die user eingeben haben
 
 das alles wird in einem k8s ausgefuehrt. ]
 
-### Structure
 
 The foundation of our application is established by our professor, based on the Kappa Architecture and utilizing Apache Spark as the central technology. Below is an overview of the implementation and modifications:
 
 #### Application Overview
 
-Our application is designed to match students with suitable academic supervisors through a sophisticated data processing pipeline. The key components and technologies involved are as follows:
+The key components and technologies we used are as follows:
 
 1. **Node.js Express Web App**:
    - Provides a user interface for students to submit their research titles and abstracts.
@@ -111,12 +110,14 @@ Our application is designed to match students with suitable academic supervisors
 
 By leveraging this architecture, our application efficiently processes and stores data, enabling the effective matching of students with the most suitable academic supervisors.
 
-
+![Structure of the used technologies](Bild_1.png)
 
 ## Implementation
 
+
 ## Functionality
-[screencast]
+- schriftliche Beschreibung 
+- [screencast]
 ## Results
 
 ## Challenges
