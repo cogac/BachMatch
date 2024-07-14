@@ -40,6 +40,11 @@ Students:
 
 Graduate students can use our program to find the best academic supervisor for their research projects. They enter their project title and a brief abstract, and the program searches a database of supervisors. The program then provides a list of the top 10 supervisors whose expertise best matches the student's research topic. This process ensures that students find the most relevant and suitable supervisors efficiently.
 
+## Datasets
+
+- BetruerFertig.csv: This file contains data about supervisors, including their area of expertise and a detailed description of their research topics.
+- extracted_abstracts.csv: This file contains data about students, including the title of their research project and an abstract.
+
 
 ## Structure
 
@@ -71,8 +76,6 @@ das alles wird in einem k8s ausgefuehrt.
 ## Implementation
 
 ## Functionality
-
-## (Anwendung)
 
 ## Results
 
