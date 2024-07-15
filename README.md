@@ -10,7 +10,7 @@
 | David Kleiner  | 1622864        |
 | Gülbahar Cogac | 5801309        |
 
-## TODO:
+<!--- ## TODO:
 
 (This section gets deleted when everything is done)
 Verfassen Sie eine Dokumentation, die den Aufbau, die Implementierung und die
@@ -28,7 +28,7 @@ und Lernerfahrungen in einem Abschlussbericht zusammen.
 
 Finding an academic supervisor who aligns perfectly with a student's research interests is a critical step in the success of any research project. Our program addresses this need by providing a systematic and efficient way for students to connect with supervisors whose expertise closely matches their research topics. By leveraging advanced search algorithms and a comprehensive database of academic profiles, we aim to make the process of finding the right supervisor both quick and accurate.
 
-
+---->
 ## Objective
 
 The primary objective of our program is to facilitate the matching process between students and academic supervisors. By inputting their research title and a brief summary, students can use our program to search through a curated database of potential supervisors. Each supervisor has listed their research areas and provided a description of their expertise. The program’s goal is to return the top 10 most suitable supervisors based on the relevance of their expertise to the student's research. This not only saves time but also enhances the quality of academic mentorship by ensuring a better fit between students and supervisors.
@@ -48,7 +48,7 @@ Graduate students can use our program to find the best academic supervisor for t
 
 ## Structure
 
-[Grundaufbau gegeben, Anwendung basierend auf der Kappa-Architektur und Apache Spark als zentrale Technologie
+<!---[Grundaufbau gegeben, Anwendung basierend auf der Kappa-Architektur und Apache Spark als zentrale Technologie
 
 Unsere Änderungen:
 
@@ -67,7 +67,7 @@ Beispiel Texte fuer 'wissen. arbeiten'
 texte die die user eingeben haben
 
 das alles wird in einem k8s ausgefuehrt. ]
-
+---->
 
 The foundation of our application is established by our professor, based on the Kappa Architecture and utilizing Apache Spark as the central technology. Below is an overview of the implementation and modifications:
 
