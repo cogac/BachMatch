@@ -110,6 +110,9 @@ The key components and technologies we used are as follows:
 
 By leveraging this architecture, our application efficiently processes and stores data, enabling the effective matching of students with the most suitable academic supervisors.
 
+
+This is how the construct could look like: 
+
 ![Structure of the used technologies](Bild_1.PNG)
 
 ## Implementation
