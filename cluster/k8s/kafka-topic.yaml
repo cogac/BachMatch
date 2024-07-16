@@ -1,11 +1,11 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: tracking-data
-  labels:
-    strimzi.io/cluster: my-cluster
+ name: bachmatch
+ labels:
+  strimzi.io/cluster: bachmatch-kafka
 spec:
-  partitions: 1
-  replicas: 1
-  config:
-    retention.ms: 62400
+ partitions: 1
+ replicas: 1
+ config:
+  retention.ms: 62400

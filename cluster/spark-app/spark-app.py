@@ -1,95 +1,95 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-from pyspark.sql.types import IntegerType, StringType, StructType, TimestampType
+from pyspark.sql.types import StructType, StringType, TimestampType, IntegerType
+# for environment variables
+import os
 
-dbUrl = 'jdbc:mysql://my-app-mariadb-service:3306/popular'
-dbOptions = {"user": "root", "password": "mysecretpw"}
-dbSchema = 'popular'
+windowDuration = '10 seconds'
+slidingDuration = '10 seconds'
 
-windowDuration = '1 minute'
-slidingDuration = '1 minute'
-
-# Example Part 1
-# Create a spark session
+# Create a Spark Session
 spark = SparkSession.builder \
-    .appName("Use Case").getOrCreate()
+    .config('spark.jars', 'spark-connector-assembly-1.3.2.jar')\
+    .appName("BachMatch") \
+    .getOrCreate()
 
-# Set log level
+# spark logging level
 spark.sparkContext.setLogLevel('WARN')
+# Define the schema for the Kafka messages
+schema = (
+    StructType()
+    .add("topic", StringType())
+    .add("title", StringType())
+    .add("abstract", StringType())
+    .add("timestamp", IntegerType())
+)
 
-# Example Part 2
-# Read messages from Kafka
-kafkaMessages = spark \
-    .readStream \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers",
-            "my-cluster-kafka-bootstrap:9092") \
-    .option("subscribe", "tracking-data") \
-    .option("startingOffsets", "earliest") \
+# Read the Kafka topic as a streaming DataFrame
+kafka_stream = spark \
+    .readStream.format("kafka") \
+    .option("kafka.bootstrap.servers", 'bachmatch-kafka-bootstrap:9092') \
+    .option("subscribe", "bachmatch") \
+    .option("startingOffsets", "latest") \
     .load()
 
-# Define schema of tracking data
-trackingMessageSchema = StructType() \
-    .add("mission", StringType()) \
-    .add("timestamp", IntegerType())
-
-# Example Part 3
-# Convert value: binary -> JSON -> fields + parsed timestamp
-trackingMessages = kafkaMessages.select(
-    # Extract 'value' from Kafka message (i.e., the tracking data)
+# get the correct format for the dataframe
+user_abstract_df = kafka_stream.select(
     from_json(
         column("value").cast("string"),
-        trackingMessageSchema
+        schema
     ).alias("json")
 ).select(
-    # Convert Unix timestamp to TimestampType
     from_unixtime(column('json.timestamp'))
     .cast(TimestampType())
     .alias("parsed_timestamp"),
-
-    # Select all JSON fields
     column("json.*")
 ) \
-    .withColumnRenamed('json.mission', 'mission') \
+    .withColumnRenamed('json.title', 'title') \
+    .withColumnRenamed('json.topic', 'topic') \
+    .withColumnRenamed('json.abstract', 'abstract')\
     .withWatermark("parsed_timestamp", windowDuration)
 
-# Example Part 4
-# Compute most popular slides
-popular = trackingMessages.groupBy(
-    window(
-        column("parsed_timestamp"),
-        windowDuration,
-        slidingDuration
-    ),
-    column("mission")
-).count() \
- .withColumnRenamed('window.start', 'window_start') \
- .withColumnRenamed('window.end', 'window_end') \
 
-# Example Part 5
-# Start running the query; print running counts to the console
-consoleDump = popular \
+weav_options = {
+    "host": os.environ['WEAVSERVERHOST'],
+    "className": "UserAbstract",
+}
+# only dataframes can be written to weaviate, no streaming dataframes -- but we don't need any aggregation
+abstract_batch = user_abstract_df.groupBy(
+    column("topic"),
+    column("title"),
+    column("abstract")
+).count() \
+ .select(column('topic'), column('title'), column('abstract'))\
+
+# write the batch to
+consoleDump = abstract_batch\
     .writeStream \
-    .outputMode("update") \
+    .outputMode("complete") \
     .format("console") \
     .start()
 
-# Example Part 6
+# function to write batches to weaviate to
 
 
-def saveToDatabase(batchDataframe, batchId):
-    global dbUrl, dbSchema, dbOptions
-    print(f"Writing batchID {batchId} to database @ {dbUrl}")
-    batchDataframe.distinct().write.jdbc(dbUrl, dbSchema, "overwrite", dbOptions)
+def saveToDatabase(batchDF, batchId):
+    print(f"Writing batchID {batchId} to database ")
+    batchDF.distinct().write\
+        .format("io.weaviate.spark.Weaviate")\
+        .option("batchSize", 10)\
+        .option("scheme", "http")\
+        .option("host", weav_options['host'])\
+        .option("className", weav_options['className'])\
+        .mode("append")
+    print('Written to database')
 
 
-# Example Part 7
-dbInsertStream = popular \
-    .select(column('mission'), column('count')) \
+# theoretically write the data to weaviate (it does not get there though)
+dbInsertStream = abstract_batch\
     .writeStream \
     .outputMode("complete") \
     .foreachBatch(saveToDatabase) \
     .start()
 
-# Wait for termination
+# wait until spark wants pyspark to stop
 spark.streams.awaitAnyTermination()

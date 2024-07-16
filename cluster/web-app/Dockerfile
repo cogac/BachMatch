@@ -1,19 +1,33 @@
-FROM node:slim
-LABEL maintainer="Dennis Pfisterer, http://dennis-pfisterer.de"
+FROM python:3.11.9-slim
 
-# Set node environment, either development or production
-ARG NODE_ENV=production
-ENV NODE_ENV $NODE_ENV
 
-# Install dependencies
-WORKDIR /app
-COPY package.json package-lock.json /app/
-RUN npm install --no-optional && npm cache clean --force
+ENV SRC_DIR /flaskapp
 
-# Install app
-COPY *.js /app/
+ENV FLASK_APP index
+ENV FLASK_ENV development
+ENV FLASK_DEBUG 1
+ENV FLASK_FORM_SECRET bachmatch_secret
 
-# Export app port and set entrypoint at startup
+ENV WEAVSERVERHOST bachmatch-weaviate
+ENV WEAVSERVERPORT 80
+ENV WEAVGRPCSERVERHOST bachmatch-weaviate-grpc
+ENV WEAVGRPCSERVERPORT 50051
+
+ENV KAFKABOOTSTRAP bachmatch-kafka-bootstrap:9092
+
+COPY *.py requirements.txt ${SRC_DIR}/
+COPY data/*.csv ${SRC_DIR}/data/
+COPY templates/* ${SRC_DIR}/templates/
+
+
+
+WORKDIR ${SRC_DIR}
+
+RUN pip install -r requirements.txt
+
+ENV PYTHONUNBUFFERED=1
+
 EXPOSE 3030
-ENTRYPOINT ["node", "index.js"]
-CMD [""]
+#CMD ["python","-m", "flask", "run", "-h", "localhost", "-p", "3030"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=3030"]
+#CMD ["python", "index.py"]

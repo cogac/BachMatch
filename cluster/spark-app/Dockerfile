@@ -1,11 +1,15 @@
 FROM bitnami/spark:3.5.1
-LABEL maintainer="Dennis Pfisterer, http://dennis-pfisterer.de"
 
 #------------------------------------
 # Set execution environment
 
 ENV SPARK_VERSION "3.5.1"
 
+ENV WEAVSERVERHOST bachmatch-weaviate
+ENV WEAVSERVERPORT 80
+ENV WEAVGRPCSERVERHOST bachmatch-weaviate-grpc
+ENV WEAVGRPCSERVERPORT 50051
+ENV KAFKABOOTSTRAP bachmatch-kafka-bootstrap:9092
 #------------------------------------
 # Download Java dependencies (Kafka, MariaDB) using Ivy (cf. https://stackoverflow.com/a/15456621) 
 
@@ -24,6 +28,9 @@ ENV MYSQL_DB_VERSION "8.4.0"
 RUN ${IVY_CMD} -dependency "com.mysql" "mysql-connector-j" "${MYSQL_DB_VERSION}"
 ENV JDBC_JAR_FILE "${EXTRA_JAR_PATH}/mysql-connector-j-${MYSQL_DB_VERSION}.jar"
 
+COPY spark-connector-assembly-1.3.2.jar /app/
+
+
 # Delete temp dir
 RUN rm -rf ${IVY_PACKAGE_DIR}
 
@@ -41,6 +48,9 @@ RUN useradd --uid 1001 --gid spark --shell /bin/bash spark
 
 RUN apt-get update && apt-get install -y zip
 RUN chown spark:spark /app/
+
+
+RUN pip install numpy
 
 USER spark
 WORKDIR /app

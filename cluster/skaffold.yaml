@@ -1,17 +1,19 @@
-apiVersion: skaffold/v2beta29
+apiVersion: skaffold/v4beta9
 kind: Config
-
 metadata:
- name: popular-slides
-
+ name: dev-cluster
 build:
  artifacts:
-  - image: farberg/popular-slides
+  - image: bachmatch/bachmatch
     context: web-app
-
-  - image: farberg/popular-slides-spark
+    docker:
+     dockerfile: Dockerfile
+  - image: bachmatch/bachmatch-spark
     context: spark-app
-deploy:
- kubectl:
-  manifests:
-   - k8s/*.yaml
+    docker:
+     dockerfile: Dockerfile
+manifests:
+ rawYaml:
+  - k8s/kafka-topic.yaml
+  - k8s/bachmatch-spark.yaml
+  - k8s/bachmatch-web.yaml
