@@ -42,8 +42,9 @@ Graduate students can use our program to find the best academic supervisor for t
 
 ## Datasets
 
-- BetruerFertig.csv: This file contains data about supervisors, including their area of expertise and a detailed description of their research topics.
-- extracted_abstracts.csv: This file contains data about students, including the title of their research project and an abstract.
+- data/scientific_supervisors.csv: This file contains data about supervisors, including their area of expertise and a detailed description of their research topics.
+- data/example_abstracts.csv: This file contains data about students, including the title of their research project and an abstract.
+Both of these files are also included in the cluster folder, as they get used to populate the weaviate database.
 
 ## Structure
 
