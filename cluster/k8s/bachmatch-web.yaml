@@ -1,0 +1,58 @@
+#Begin: Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: bachmatch
+ labels:
+  app: bachmatch
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   app: bachmatch-web-app
+ template:
+  metadata:
+   labels:
+    app: bachmatch-web-app
+  spec:
+   containers:
+    - name: bachmatch-web-app
+      image: bachmatch/bachmatch
+      ports:
+       - containerPort: 3030
+
+---
+#Begin: Service
+apiVersion: v1
+kind: Service
+metadata:
+ name: bachmatch-service
+ labels:
+  app: bachmatch-service
+spec:
+ selector:
+  app: bachmatch-web-app
+ ports:
+  - protocol: TCP
+    port: 3030
+    targetPort: 3030
+#End: Service
+---
+#Begin: Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: bachmatch-ingress
+ annotations:
+  nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+ rules:
+  - http:
+     paths:
+      - path: /
+        pathType: Prefix
+        backend:
+         service:
+          name: bachmatch-service
+          port:
+           number: 3030

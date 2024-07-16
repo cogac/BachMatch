@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% from 'bootstrap5/form.html' import render_form %} {% block title %}
+{{abstract.title}} {% endblock %}
+{% block content %}
+<div>
+ <h1>{{abstract.title}}</h1>
+ <h2>{{abstract.topic}}</h2>
+ <br>{{abstract.abstract}}
+ <div>{{ render_form(form) }}</div>
+ <div>
+ <ul>
+        {% for item in possibles %}
+            <li>
+                <strong>First name:</strong> {{ item.fname }}
+                <br>
+                <strong>Last name:</strong> {{ item.lname }}
+                <br>
+                <strong>Expertise:</strong> {{ item.expertise }}
+                <br>
+                <strong>Personal Statement:</strong> {{ item.statement }}
+            </li>
+        {% endfor %}
+    </ul></div>
+</div>
+{% endblock %}

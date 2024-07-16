@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% from 'bootstrap5/form.html' import render_form %}
+{% block title %} BachMatch - Scientific Tinder {% endblock %} {% block content
+%}
+
+<h1>Welcome to BachMatch!</h1>
+<hr />
+<h5>You can either choose one of our example texts to try out the platform</h5>
+<a href="/abstracts"><button>Look at example Abstracts</button></a>
+<h5>
+ or you can go and try your own proposal to get a scientific supervisor that can
+ actually help you
+</h5>
+
+<a href="/new"><button>Click Me to write your find Your Supervisor</button></a>
+{% endblock %}

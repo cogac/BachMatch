@@ -1,0 +1,6 @@
+{% block title %} Example Abstracts {% endblock %}
+<div class="container">
+ {% for item in abstracts %}
+ <li><a href="/abstracts/{{ item.id }}">{{ item.title }}</a></li>
+ {% endfor %}
+</div>

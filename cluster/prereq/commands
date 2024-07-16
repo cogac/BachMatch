@@ -1,0 +1,4 @@
+echo "disregard this error: Error: INSTALLATION FAILED: context deadline exceeded, this is to be expected and should not affect the cluster" && helm install --wait --timeout 2m0s \
+        bachmatch-hadoop-cluster pfisterer-hadoop/hadoop \
+        --set hdfs.dataNode.replicas=3  \
+        --set yarn.nodeManager.replicas=3 && helm install bachmatch-kafka-operator strimzi/strimzi-kafka-operator

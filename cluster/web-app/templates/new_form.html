@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% from 'bootstrap5/form.html' import render_form %}
+{% block title %} BachMatch - Find Your Supe{% endblock %} {% block content %}
+
+<div class="container">
+ {{ render_form(form) }}
+
+ <p class="pt-5"><strong>{{ message }}</strong></p>
+</div>
+<br>
+ {{ possibles }}
+<br>
+ <div>
+ <ul>
+        {% for item in possibles %}
+            <li>
+                <strong>First name:</strong> {{ item.fname }}
+                <br>
+                <strong>Last name:</strong> {{ item.lname }}
+                <br>
+                <strong>Expertise:</strong> {{ item.expertise }}
+                <br>
+                <strong>Personal Statement:</strong> {{ item.statement }}
+            </li>
+        {% endfor %}
+    </ul></div>
+{% endblock %}
